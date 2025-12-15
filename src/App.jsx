@@ -8,6 +8,9 @@ import Footer from "./components/Footer";
 import FindPassword from "./pages/FindPassword";
 import FindID from "./pages/FindId";
 import SupportSection from "./pages/Support";
+import JoinMembership from "./pages/JoinMembership";
+import Brand from "./pages/Brand";
+import NoticeSection from "./pages/NoticeSection";
 
 // function Home() {
 //   return <div className="p-5">홈 페이지</div>;
@@ -36,6 +39,9 @@ function App() {
         <Route path="/find-pw" element={<FindID />} />
         <Route path="/register" element={<Register />} />
         <Route path="/find-id" element={<FindPassword />} />
+        <Route path="/join" element={<JoinMembership />} />
+        <Route path="/brand" element={<Brand />} />
+        <Route path="/notice" element={<NoticeSection />} />
       </Routes>
       <SupportSection/>
       <Footer />

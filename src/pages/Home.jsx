@@ -3,7 +3,6 @@ import Hero from "../components/Hero";
 import PromoCards from "../components/PromoCards";
 import Container from "../components/Container";
 import LogoRow from "../pages/LogoRow";
-import SupportSection from "./Support";
 
 export default function Home() {
   return (
@@ -23,7 +22,6 @@ export default function Home() {
         <RefundTable />
       </section>
      {/* Support Section */}
-     <SupportSection />
       </Container>
     </main>
   );

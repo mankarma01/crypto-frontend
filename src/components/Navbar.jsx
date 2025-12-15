@@ -14,10 +14,10 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <nav className="hidden md:flex gap-8 text-sm font-medium">
-          <Link href="#" className="hover:text-pink-500">
+          <Link to="/brand" className="hover:text-pink-500">
             서비스 소개
           </Link>
-          <Link to="#" className="hover:text-pink-500">
+          <Link to="/notice" className="hover:text-pink-500">
             트레이딩 가이드
           </Link>
           <Link to="#" className="text-pink-500 font-semibold">

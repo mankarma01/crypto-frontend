@@ -45,7 +45,7 @@ export default function Login() {
         <div className="flex justify-between mt-4 text-sm text-pink-500 font-medium">
           <Link to="/find-pw" className="hover:underline">아이디 찾기</Link>
           <Link to="/find-id" className="hover:underline">비밀번호 찾기</Link>
-          <Link to="#" className="hover:underline">회원가입</Link>
+          <Link to="/join" className="hover:underline">회원가입</Link>
         </div>
       </div>
       </div>
