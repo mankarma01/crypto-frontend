@@ -1,0 +1,58 @@
+export const refundData = [
+  {
+    uid: "2286****",
+    exchange: "BitMEX",
+    amount: "60.38 USDT",
+    status: "출금 완료",
+    date: "2024-12-10",
+  },
+  {
+    uid: "2654****",
+    exchange: "Bybit",
+    amount: "1,091.37 USDT",
+    status: "출금 완료",
+    date: "2024-12-11",
+  },
+  {
+    uid: "LBA4****",
+    exchange: "LBANK",
+    amount: "122.20 USDT",
+    status: "출금 완료",
+    date: "2024-12-11",
+  },
+  {
+    uid: "7841****",
+    exchange: "OKX",
+    amount: "265.45 USDT",
+    status: "출금 완료",
+    date: "2024-12-12",
+  },
+  {
+    uid: "7982****",
+    exchange: "Bitget",
+    amount: "1,082.75 USDT",
+    status: "출금 완료",
+    date: "2024-12-12",
+  },
+  {
+    uid: "6198****",
+    exchange: "Bitget",
+    amount: "17,520.00 USDT",
+    status: "출금 완료",
+    date: "2024-12-13",
+  },
+  {
+    uid: "5318****",
+    exchange: "HTX",
+    amount: "54.42 USDT",
+    status: "출금 완료",
+    date: "2024-12-13",
+  },
+  {
+    uid: "9263****",
+    exchange: "Deepcoin",
+    amount: "86.00 USDT",
+    status: "출금 완료",
+    date: "2024-12-14",
+  },
+];
