@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Exchanges from "./components/Exchanges";
+import OfficialAffiliateExchanges from "./components/OfficialAffiliateExchanges"; 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/exchanges" element={<Exchanges />} />
+        <Route path="/official-affiliate-exchanges" element={<OfficialAffiliateExchanges />} />
         <Route path="/login" element={<Login />} />
         <Route path="/find-pw" element={<FindID />} />
         <Route path="/register" element={<Register />} />
