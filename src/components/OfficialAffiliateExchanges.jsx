@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Container from "./Container";
 
 export default function OfficialAffiliateExchanges() {
   const badgeStyleMap = {
@@ -173,6 +174,7 @@ export default function OfficialAffiliateExchanges() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 pt-20 pb-16">
+      <Container>
       {/* Title */}
       <div className="mb-10">
         <h2 className="text-2xl font-bold mb-2">Reality 수수료 환급</h2>
@@ -317,7 +319,7 @@ export default function OfficialAffiliateExchanges() {
           물어볼 수 없어 답답하셨죠?
         </p>
       </div>
-      
+</Container>      
     </section>
   );
 }

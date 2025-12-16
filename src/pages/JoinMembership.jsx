@@ -21,7 +21,7 @@ function Step1({ onNext }) {
   return (
     <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md mx-auto">
       <div className="flex flex-col items-center mb-6">
-        <img src="/logos/crypto-logo.png" alt="Logo" className="w-16 h-16 mb-4" />
+        <img src="/logo.svg" alt="Logo" className="w-16 h-16 mb-4" />
         <h2 className="text-2xl font-bold text-center">Join Membership</h2>
         <p className="text-sm text-gray-500 mt-1 text-center">Step 1 of 5</p>
       </div>
