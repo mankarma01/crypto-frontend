@@ -23,7 +23,7 @@ export default function Navbar() {
               트레이딩 가이드
             </Link>
 
-            <Link to="/calculator" className="hover:text-pink-500 font-semibold">
+            <Link to="/refund" className="hover:text-pink-500 font-semibold">
               수수료 환급 계산기
             </Link>
 
