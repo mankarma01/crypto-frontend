@@ -12,6 +12,7 @@ import SupportSection from "./pages/Support";
 import JoinMembership from "./pages/JoinMembership";
 import Brand from "./pages/Brand";
 import NoticeSection from "./pages/NoticeSection";
+import RefundCalculator from "./pages/RefundCalculator";
 
 // function Home() {
 //   return <div className="p-5">홈 페이지</div>;
@@ -44,6 +45,7 @@ function App() {
         <Route path="/join" element={<JoinMembership />} />
         <Route path="/brand" element={<Brand />} />
         <Route path="/notice" element={<NoticeSection />} />
+        <Route path="/refund" element={<RefundCalculator />} />
       </Routes>
       <SupportSection/>
       <Footer />

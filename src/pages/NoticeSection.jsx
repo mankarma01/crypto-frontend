@@ -3,22 +3,22 @@ import Container from "../components/Container";
 export default function NoticeSection() {
   const exchangeTutorials = [
     {
-      image: "/images/bitget-api.png",
+      image: "/logos/bitunix.png",
       title: "Bitget API 거래 및 카피 트레이딩 환급률 변경 안내",
       date: "25.10.10",
     },
     {
-      image: "/images/satisfaction-survey.png",
+      image: "/logos/bitcoin-btc-logo.png",
       title: "테더백 만족도 조사",
       date: "19.09.19",
     },
     {
-      image: "/images/okx-kyc.png",
+      image: "/logos/dogecoin-doge-logo.png",
       title: "[OKX] KYC 제거 방법",
       date: "24.06.22",
     },
     {
-      image: "/images/bingx-kyc.png",
+      image: "/logos/ethereum-eth-logo.svg",
       title: "[BINGX] KYC 이전 방법",
       date: "24.06.22",
     },
@@ -26,22 +26,22 @@ export default function NoticeSection() {
 
   const newsletters = [
     {
-      image: "/images/okx-money.png",
+      image: "/logos/solana-sol-logo.png",
       title: "OKX 거래소 가입 전 돈을 절약하는 방법",
       date: "24.08.02",
     },
     {
-      image: "/images/kyc-tips.png",
+      image: "/logos/tether-usdt-logo.png",
       title: "KYC 인증 이유 / 선물 거래 팁",
       date: "24.08.02",
     },
     {
-      image: "/images/okx-refund.png",
+      image: "/logos/xrp-xrp-logo.png",
       title: "모바일로 3분 안에 30만원 환급 받는 방법 (OKX 버전)",
       date: "24.08.02",
     },
     {
-      image: "/images/bitget-refund.png",
+      image: "/logos/bitunix.png",
       title: "거래소 가입 후 테더백(BITGET) 수수료 환급 받기",
       date: "24.08.02",
     },
