@@ -1,13 +1,19 @@
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import Container from "./Container";
 
-export default function Navbar() {
+export default function Navbar({ isAuth, setIsAuth }) {
+  const navigate = useNavigate();
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setIsAuth(false);
+  //   navigate("/");
+  // };
+
   return (
     <header className="fixed top-0 left-0 w-full bg-white border-b z-50">
       <Container>
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-16">
-
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold">
             Crypto<span className="font-extrabold">Exchange</span>
@@ -35,18 +41,24 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Login Button */}
-          <Link
-            to="/login"
-            className="border px-5 py-2 rounded text-sm hover:bg-gray-100"
-          >
-            로그인
-          </Link>
-
+          {/* RIGHT SIDE (LOGIN / PROFILE) */}
+          {isAuth ? (
+            <Link
+              to="/profile"
+              className="border px-5 py-2 rounded text-sm hover:bg-gray-100"
+            >
+              내 프로필
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="border px-5 py-2 rounded text-sm hover:bg-gray-100"
+            >
+              로그인
+            </Link>
+          )}
         </div>
-        </Container>
-        </header>
+      </Container>
+    </header>
   );
 }
-
-
