@@ -1,4 +1,5 @@
-import Container from "../components/Container";
+import Container from "../../components/Container";
+import { Link } from "react-router-dom";
 
 export default function NoticeSection() {
   const exchangeTutorials = [
@@ -6,21 +7,25 @@ export default function NoticeSection() {
       image: "/logos/bitunix.png",
       title: "Bitget API 거래 및 카피 트레이딩 환급률 변경 안내",
       date: "25.10.10",
+      link: "/notice/bitget-api-changes"
     },
     {
       image: "/logos/bitcoin-btc-logo.png",
       title: "테더백 만족도 조사",
       date: "19.09.19",
+      link: "/notice/tetherback-satisfaction"
     },
     {
       image: "/logos/dogecoin-doge-logo.png",
       title: "[OKX] KYC 제거 방법",
       date: "24.06.22",
+      link: "/notice/okx-kyc-removal"
     },
     {
       image: "/logos/ethereum-eth-logo.svg",
       title: "[BINGX] KYC 이전 방법",
       date: "24.06.22",
+      link: "/notice/bingx-kyc-transfer"
     },
   ];
 
@@ -29,6 +34,7 @@ export default function NoticeSection() {
       image: "/logos/solana-sol-logo.png",
       title: "OKX 거래소 가입 전 돈을 절약하는 방법",
       date: "24.08.02",
+      link: "/notice/okx-pre-join-savings"
     },
     {
       image: "/logos/tether-usdt-logo.png",
@@ -54,13 +60,16 @@ const renderCards = (items) => (
         key={index} 
         className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
       >
-        <div className="w-full h-40 md:h-48 lg:h-40 overflow-hidden">
+         <Link to={item.link || "#"}> 
+           <div className="w-full h-40 md:h-48 lg:h-40 overflow-hidden">
           <img 
             src={item.image} 
             alt={item.title} 
             className="w-full h-full object-cover"
           />
         </div>
+        </Link>
+
         <div className="p-4 flex-1 flex flex-col justify-between">
           <h3 className="text-sm md:text-base font-semibold mb-2 line-clamp-2">{item.title}</h3>
           <p className="text-xs text-gray-500 flex items-center gap-1 mt-auto">

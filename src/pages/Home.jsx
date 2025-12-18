@@ -2,7 +2,7 @@ import RefundTable from "../components/RefundTable";
 import Hero from "../components/Hero";
 import PromoCards from "../components/PromoCards";
 import Container from "../components/Container";
-import LogoRow from "../pages/LogoRow";
+import LogoRow from "../pages/FeeRefundCalculator/LogoRow";
 
 export default function Home() {
   return (

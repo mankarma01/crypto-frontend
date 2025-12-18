@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import CryptoExchangeLogo from "/logo.svg"; // Replace with actual logo path
-import LogoRow from "./LogoRow";
+import CryptoExchangeLogo from "/logo.svg";
+ // Replace with actual logo path
+import LogoRow from "../../pages/FeeRefundCalculator/LogoRow";
 export default function RefundCalculator() {
   return (
     <section className="bg-gray-50 py-20">
@@ -26,7 +27,7 @@ export default function RefundCalculator() {
 
           {/* Call To Action Button */}
           <Link
-            to="#"
+            to="/getting-started"
             className="inline-block bg-pink-500 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-pink-600 transition"
           >
             시작하기
