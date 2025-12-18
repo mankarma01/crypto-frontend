@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import { Routes, Route } from "react-router-dom";
-=======
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./api/api";
->>>>>>> origin/main
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -18,7 +14,7 @@ import FindID from "./pages/FindId";
 import SupportSection from "./pages/Support";
 import JoinMembership from "./pages/JoinMembership";
 import Brand from "./pages/Brand";
-<<<<<<< HEAD
+
 import NoticeSection from "./pages/TradingGuide/NoticeSection";
 import Bitget from "./pages/TradingGuide/Bitget";
 import Tetherback from "./pages/TradingGuide/Tetherback";
@@ -26,40 +22,26 @@ import OKX from "./pages/TradingGuide/OKX";
 import BINGX from "./pages/TradingGuide/BINGX";
 import OKXVirtual from "./pages/TradingGuide/OKXVirtual";
 import RefundCalculator from "./pages/FeeRefundCalculator/RefundCalculator";
-
-// ✅ IMPORT ExchangeFlow
 import ExchangeFlow from "./pages/FeeRefundCalculator/GettingStarte";
-
-=======
-import NoticeSection from "./pages/NoticeSection";
-import RefundCalculator from "./pages/RefundCalculator";
 import Profile from "./pages/Profile";
->>>>>>> origin/main
 
 function App() {
-  const [isAuth, setIsAuth] = useState(null); // null = checking auth
+  const [isAuth, setIsAuth] = useState(null);
 
-  // ✅ CHECK TOKEN ON APP LOAD
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     if (!token) {
       setIsAuth(false);
       return;
     }
-
-    // verify token with protected API
     api.get("/api/profile")
-      .then(() => {
-        setIsAuth(true); // token valid
-      })
+      .then(() => setIsAuth(true))
       .catch(() => {
         localStorage.removeItem("token");
-        setIsAuth(false); // token invalid
+        setIsAuth(false);
       });
   }, []);
 
-  // ⏳ loading state while checking token
   if (isAuth === null) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -69,31 +51,14 @@ function App() {
   }
 
   return (
-<<<<<<< HEAD
     <>
-      <Navbar />
-=======
-    <Router>
-      {/* ✅ Navbar decides Login / Profile */}
       <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
->>>>>>> origin/main
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/exchanges" element={<Exchanges />} />
-<<<<<<< HEAD
-        <Route
-          path="/official-affiliate-exchanges"
-          element={<OfficialAffiliateExchanges />}
-        />
-        <Route path="/login" element={<Login />} />
-=======
         <Route path="/official-affiliate-exchanges" element={<OfficialAffiliateExchanges />} />
-        
-        {/* ✅ Login */}
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-
->>>>>>> origin/main
         <Route path="/find-pw" element={<FindID />} />
         <Route path="/register" element={<Register />} />
         <Route path="/find-id" element={<FindPassword />} />
@@ -108,19 +73,14 @@ function App() {
         <Route path="/notice/bingx-kyc-transfer" element={<BINGX />} />
         <Route path="/notice/okx-pre-join-savings" element={<OKXVirtual />} />
 
-        {/* Refund Flow */}
+        {/* Refund */}
         <Route path="/refund" element={<RefundCalculator />} />
 
-<<<<<<< HEAD
-        {/* ✅ STEP FLOW (FIXED) */}
+        {/* Step Flow */}
         <Route path="/getting-started/*" element={<ExchangeFlow />} />
-=======
-        {/* ✅ PROTECTED PROFILE ROUTE */}
-        <Route
-          path="/profile"
-          element={isAuth ? <Profile /> : <Navigate to="/login" />}
-        />
->>>>>>> origin/main
+
+        {/* Protected Profile */}
+        <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/login" />} />
       </Routes>
 
       <SupportSection />
