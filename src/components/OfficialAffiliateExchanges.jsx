@@ -314,11 +314,7 @@ export default function OfficialAffiliateExchanges() {
         ))}
       </div>
 
-      <div>
-        <p className="font-[Pretendard,sans-serif] text-[20px] leading-[28px] font-medium text-pink-500 mt-10">
-          물어볼 수 없어 답답하셨죠?
-        </p>
-      </div>
+      
 </Container>      
     </section>
   );
