@@ -2,39 +2,63 @@ import Container from "../components/Container";
 
 export default function SupportSection() {
   return (
-    <section className="max-w-7xl mx-auto px-6 pt-16 pb-16 bg-white">
+    <section className="bg-white py-25">
       <Container>
-        <h2 className="text-3xl md:text-4xl font-bold leading-snug text-gray-900 mb-6">
-          외환 거래 관련 문의
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
-          질문이 있으신가요? 문의할 수 없어 답답하신가요? Crypto Exchange에서
-          운영하며, 각 공식 제휴 거래소의 서비스 지원을 위해 연락해 주세요.
-        </p>
 
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-          #KYC 인증 방법 <br />
-          #거래 실패 시 지원
-        </p>
+        {/* SAME WIDTH WRAPPER */}
+        <div className="max-w-5xl mx-auto">
 
-        <div className="flex justify-center gap-4 mt-6">
-          <a
-            //   href="https://kakaotalk.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md transition"
-          >
-            카카오톡 문의
-          </a>
-          <a
-            //   href="https://t.me/YourTelegramLink"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-md transition"
-          >
-            텔레그램 문의
-          </a>
+          {/* Pink Heading */}
+          <h2 className="text-start text-[rgb(246,34,199)] text-xl font-semibold mb-4">
+            문의할 수 없어 답답하신가요?
+          </h2>
+
+          {/* Support Box */}
+          <div className="border border-gray-300 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+
+            {/* Left Content */}
+            <div>
+              <p className="text-sm text-gray-500 mb-2">
+                CryptoExchange 운영
+              </p>
+
+              <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                공식 제휴 거래소별 서비스 지원 문의
+              </h3>
+
+              <div className="flex flex-wrap gap-2 mt-3">
+                <span className="px-3 py-1 text-sm bg-gray-100 rounded-full text-gray-600">
+                  #KYC 인증 방법
+                </span>
+                <span className="px-3 py-1 text-sm bg-gray-100 rounded-full text-gray-600">
+                  #거래 실패 시
+                </span>
+              </div>
+            </div>
+
+            {/* Right Button */}
+            <div>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3
+                  bg-[rgb(0,173,236)]
+                  text-white font-semibold
+                  px-10 py-2 rounded-md transition"
+              >
+                <img
+                  src="/logos/telegram-png.webp"
+                  alt="Telegram"
+                  className="w-5 h-5"
+                />
+                텔레그램 문의
+              </a>
+            </div>
+
+          </div>
         </div>
+
       </Container>
     </section>
   );
