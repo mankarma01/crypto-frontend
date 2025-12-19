@@ -14,11 +14,7 @@ export default function SupportSection() {
           </h2>
 
           {/* Support Box */}
-<<<<<<< HEAD
-          <div className="border border-gray-300 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-=======
           <div className="border border-gray-300 p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
->>>>>>> 516b39219e5dab3e362d65e7802a787a0230e1d4
 
             {/* Left Content */}
             <div>
@@ -49,11 +45,7 @@ export default function SupportSection() {
                 className="inline-flex items-center gap-3
                   bg-[rgb(0,173,236)]
                   text-white font-semibold
-<<<<<<< HEAD
-                  px-10 py-2 rounded-md transition"
-=======
                   px-15 py-1 rounded-md transition"
->>>>>>> 516b39219e5dab3e362d65e7802a787a0230e1d4
               >
                 <img
                   src="/logos/telegram-png.webp"
