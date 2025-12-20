@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import api from "./api/api";
 
 import Navbar from "./components/Navbar";
+import ScrollToTop  from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import Exchanges from "./components/Exchanges";  
 import OfficialAffiliateExchanges from "./components/OfficialAffiliateExchanges";
@@ -54,6 +55,7 @@ function App() {
   return (
     <>
       <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<Home />} />
