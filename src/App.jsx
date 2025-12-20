@@ -4,7 +4,7 @@ import api from "./api/api";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Exchanges from "./components/Exchanges";
+import Exchanges from "./components/Exchanges";  
 import OfficialAffiliateExchanges from "./components/OfficialAffiliateExchanges";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -23,6 +23,7 @@ import BINGX from "./pages/TradingGuide/BINGX";
 import OKXVirtual from "./pages/TradingGuide/OKXVirtual";
 import RefundCalculator from "./pages/FeeRefundCalculator/RefundCalculator";
 import ExchangeFlow from "./pages/FeeRefundCalculator/GettingStarte";
+import LogoRowDetail from "./pages/FeeRefundCalculator/LogoRowDetail";
 import Profile from "./pages/Profile";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/exchanges" element={<Exchanges />} />
+        <Route path="/logorow/:id" element={<LogoRowDetail />} /> {/* click se detail */}
         <Route path="/official-affiliate-exchanges" element={<OfficialAffiliateExchanges />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         <Route path="/find-pw" element={<FindID />} />
