@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/api"; // your axios instance
+import api from "../api/api";
 
 export default function Login({ setIsAuth }) {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ export default function Login({ setIsAuth }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("SUBMIT CLICKED");
     setLoading(true);
     setError("");
 
@@ -22,17 +23,16 @@ export default function Login({ setIsAuth }) {
 
     try {
       const response = await api.post("/api/login", { email, password });
+      console.log("LOGIN RESPONSE:", response.data);
 
       if (response.data.result) {
-        // ✅ Save token
-        localStorage.setItem("token", response.data.token);
+  // ✅ Correct token save
+  localStorage.setItem("token", response.data.data.token);
 
-        // ✅ UPDATE AUTH STATE (THIS WAS MISSING)
-        setIsAuth(true);
-
-        // ✅ Redirect
-        navigate("/profile");
-      } else {
+  setIsAuth(true);
+  navigate("/profile");
+}
+ else {
         setError(response.data.msg || "로그인 실패");
       }
     } catch (err) {
@@ -46,6 +46,7 @@ export default function Login({ setIsAuth }) {
     }
   };
 
+  console.log("LOGIN COMPONENT RENDERED");
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 pt-24 flex flex-col">

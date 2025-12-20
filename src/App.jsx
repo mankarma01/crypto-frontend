@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import api from "./api/api";
 
 import Navbar from "./components/Navbar";
-import ScrollToTop  from "./components/ScrollToTop";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import Exchanges from "./components/Exchanges";  
 import OfficialAffiliateExchanges from "./components/OfficialAffiliateExchanges";
@@ -36,6 +36,8 @@ function App() {
       setIsAuth(false);
       return;
     }
+
+    // Check token validity
     api.get("/api/profile")
       .then(() => setIsAuth(true))
       .catch(() => {
@@ -60,7 +62,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/exchanges" element={<Exchanges />} />
-        <Route path="/logorow/:id" element={<LogoRowDetail />} /> {/* click se detail */}
+        <Route path="/logorow/:id" element={<LogoRowDetail />} />
         <Route path="/official-affiliate-exchanges" element={<OfficialAffiliateExchanges />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         <Route path="/find-pw" element={<FindID />} />
