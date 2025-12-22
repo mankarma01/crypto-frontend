@@ -31,19 +31,23 @@ function App() {
   const [isAuth, setIsAuth] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setIsAuth(false);
-      return;
-    }
+    const checkToken = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setIsAuth(false);
+        return;
+      }
 
-    // Check token validity
-    api.get("/api/profile")
-      .then(() => setIsAuth(true))
-      .catch(() => {
+      try {
+        await api.get("/api/user_profile"); // returns 200 if valid
+        setIsAuth(true);
+      } catch (err) {
         localStorage.removeItem("token");
         setIsAuth(false);
-      });
+      }
+    };
+
+    checkToken();
   }, []);
 
   if (isAuth === null) {
@@ -64,9 +68,18 @@ function App() {
         <Route path="/exchanges" element={<Exchanges />} />
         <Route path="/logorow/:id" element={<LogoRowDetail />} />
         <Route path="/official-affiliate-exchanges" element={<OfficialAffiliateExchanges />} />
-        <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+
+        {/* Redirect logged-in users away from login/register */}
+        <Route
+          path="/login"
+          element={isAuth ? <Navigate to="/profile" /> : <Login setIsAuth={setIsAuth} />}
+        />
+        <Route
+          path="/register"
+          element={isAuth ? <Navigate to="/profile" /> : <Register />}
+        />
+
         <Route path="/find-pw" element={<FindID />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/find-id" element={<FindPassword />} />
         <Route path="/join" element={<JoinMembership />} />
         <Route path="/brand" element={<Brand />} />
@@ -86,7 +99,10 @@ function App() {
         <Route path="/getting-started/*" element={<ExchangeFlow />} />
 
         {/* Protected Profile */}
-        <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to="/login" />} />
+        <Route
+          path="/profile"
+          element={isAuth ? <Profile /> : <Navigate to="/login" />}
+        />
       </Routes>
 
       <SupportSection />

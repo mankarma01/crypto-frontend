@@ -12,19 +12,7 @@ export default function LogoRow() {
   useEffect(() => {
     const fetchExchanges = async () => {
       try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          navigate("/login");
-          return;
-        }
-
-        const res = await api.get("/api/exchange/list", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
+  const res = await api.get("/api/exchange/list");
         setExchanges(res.data?.data || []);
       } catch (err) {
         console.error(

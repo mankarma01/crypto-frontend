@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-export default function RefundCalculator() {
+import api from "../../api/api";
+export default function LogoRowDetail() {
+  const { id } = useParams();
+  const [exchange , setExchange] = useState();
+  const [loading, setLoading] = useState(true);
+   useEffect(() => {
+    const fetchExchange = async () => {
+      try {
+        const res = await api.post("/api/exchange/details", {
+          exchange_id: id, // send exchange_id in body
+        });
+       console.log(res);
+        if (res.data?.success) {
+          setExchange(res.data.data);
+        } else {
+          console.error("Failed to fetch exchange details");
+        }
+      } catch (err) {
+        console.error("Error fetching exchange details:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExchange();
+  }, [id]);
+
+  if (loading) return <div className="text-center py-16">Loading...</div>;
+  if (!exchange) return <div className="text-center py-16">No details found.</div>;
+
   return (
     <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md mt-30">
       {/* Tabs */}
