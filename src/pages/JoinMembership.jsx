@@ -23,7 +23,7 @@ function Step1({ onNext }) {
   return (
     <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md mx-auto">
       <div className="flex flex-col items-center mb-6">
-        <img src="/logo.svg" alt="Logo" className="w-16 h-16 mb-4" />
+        <img src="/logo.png" alt="Logo" className="w-16 h-16 mb-4" />
         <h2 className="text-2xl font-bold text-center">회원가입</h2>
         <p className="text-sm text-gray-500 mt-1 text-center">1단계 / 5단계</p>
       </div>

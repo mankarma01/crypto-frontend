@@ -7,18 +7,11 @@ const api = axios.create({
   },
 });
 
-// Attach token for protected APIs
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
 
-    const publicRoutes = ["/api/signup", "/api/login"];
-
-    const isPublicRoute = publicRoutes.some(route =>
-      config.url?.includes(route)
-    );
-
-    if (token && !isPublicRoute) {
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
 
