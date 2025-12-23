@@ -1,10 +1,27 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CryptoExchangeLogo from "/logo.svg";
- // Replace with actual logo path
+import CryptoExchangeLogo from "/logo.svg"; // Replace with actual logo path
 import LogoRow from "../../pages/FeeRefundCalculator/LogoRow";
+import Loader from "../../pages/Loader"; // Import Loader component
+
 export default function RefundCalculator() {
+  const [loading, setLoading] = useState(true);
+
+  // Simulate async loading (or API fetch)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500); // 1 second delay
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Show loader until page is ready
+  if (loading) {
+    return <Loader loading={loading} />;
+  }
+
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-gray-50 py-20 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="bg-white rounded-2xl shadow-lg p-10 md:p-14 text-center">
 
@@ -32,8 +49,9 @@ export default function RefundCalculator() {
           >
             시작하기
           </Link>
-   {/* Rotating Logos */}
-          <div className="mb-8">
+
+          {/* Rotating Logos */}
+          <div className="mb-8 mt-10">
             <LogoRow />
           </div>
         </div>

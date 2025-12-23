@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
+import Loader from "../pages/Loader"; // import Loader component
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -29,18 +30,14 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
- const handleLogout = () => {
-  localStorage.removeItem("token");
-  window.location.href = "/login";
-};
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
 
-
+  // Show loader while fetching
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-gray-500">
-        로딩 중...
-      </div>
-    );
+    return <Loader loading={loading} />;
   }
 
   if (!userData) {

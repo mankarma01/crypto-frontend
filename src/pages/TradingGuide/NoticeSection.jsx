@@ -1,7 +1,19 @@
+import { useEffect, useState } from "react";
 import Container from "../../components/Container";
 import { Link } from "react-router-dom";
+import Loader from "../../pages/Loader"; // import Loader
 
 export default function NoticeSection() {
+  const [loading, setLoading] = useState(true);
+
+  // Simulate async data loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500); // 1 second delay, adjust as needed
+    return () => clearTimeout(timer);
+  }, []);
+
   const exchangeTutorials = [
     {
       image: "/logos/bitunix.png",
@@ -53,50 +65,54 @@ export default function NoticeSection() {
     },
   ];
 
-const renderCards = (items) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-    {items.map((item, index) => (
-      <div 
-        key={index} 
-        className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
-      >
-         <Link to={item.link || "#"}> 
-           <div className="w-full h-40 md:h-48 lg:h-40 overflow-hidden">
-          <img 
-            src={item.image} 
-            alt={item.title} 
-            className="w-full h-full object-cover"
-          />
-        </div>
-        </Link>
+  const renderCards = (items) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+      {items.map((item, index) => (
+        <div 
+          key={index} 
+          className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
+        >
+          <Link to={item.link || "#"}> 
+            <div className="w-full h-40 md:h-48 lg:h-40 overflow-hidden">
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </Link>
 
-        <div className="p-4 flex-1 flex flex-col justify-between">
-          <h3 className="text-sm md:text-base font-semibold mb-2 line-clamp-2">{item.title}</h3>
-          <p className="text-xs text-gray-500 flex items-center gap-1 mt-auto">
-            <span className="material-icons text-gray-400 text-sm">schedule</span> {item.date}
-          </p>
+          <div className="p-4 flex-1 flex flex-col justify-between">
+            <h3 className="text-sm md:text-base font-semibold mb-2 line-clamp-2">{item.title}</h3>
+            <p className="text-xs text-gray-500 flex items-center gap-1 mt-auto">
+              <span className="material-icons text-gray-400 text-sm">schedule</span> {item.date}
+            </p>
+          </div>
         </div>
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
 
+  // Show loader until data is ready
+  if (loading) {
+    return <Loader loading={loading} />;
+  }
 
   return (
     <Container>
-    <section className="py-16 mt-10">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">거래소 튜토리얼</h2>
-        <button className="text-pink-500 font-semibold hover:underline">전체 보기</button>
-      </div>
-      {renderCards(exchangeTutorials)}
+      <section className="py-16 mt-10">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">거래소 튜토리얼</h2>
+          <button className="text-pink-500 font-semibold hover:underline">전체 보기</button>
+        </div>
+        {renderCards(exchangeTutorials)}
 
-      <div className="flex justify-between items-center mt-16">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">가상자산 뉴스레터</h2>
-        <button className="text-pink-500 font-semibold hover:underline">전체 보기</button>
-      </div>
-      {renderCards(newsletters)}
-    </section>
+        <div className="flex justify-between items-center mt-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">가상자산 뉴스레터</h2>
+          <button className="text-pink-500 font-semibold hover:underline">전체 보기</button>
+        </div>
+        {renderCards(newsletters)}
+      </section>
     </Container>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import Container from "../components/Container";
+import Loader from "../pages/Loader"; // import Loader
 
 export default function CommissionDiscount() {
   const [exchanges, setExchanges] = useState([]);
@@ -13,10 +14,11 @@ export default function CommissionDiscount() {
   useEffect(() => {
     const fetchExchanges = async () => {
       try {
+        setLoading(true);
         const res = await api.get("/api/exchange/list");
 
         if (res.data?.result) {
-          setExchanges(res.data.data);
+          setExchanges(res.data.data || []);
         }
       } catch (err) {
         console.error("Failed to fetch exchanges:", err);
@@ -28,12 +30,9 @@ export default function CommissionDiscount() {
     fetchExchanges();
   }, []);
 
+  // Show loader while fetching data
   if (loading) {
-    return (
-      <Container>
-        <p className="text-center py-20">Loading...</p>
-      </Container>
-    );
+    return <Loader loading={loading} />;
   }
 
   return (
@@ -68,9 +67,7 @@ export default function CommissionDiscount() {
                 }}
               />
 
-              <h3 className="text-lg font-semibold">
-                {item.exchange_name}
-              </h3>
+              <h3 className="text-lg font-semibold">{item.exchange_name}</h3>
 
               <p className="mt-4 text-3xl font-bold text-green-600">
                 {item.commission_value}%
@@ -114,18 +111,12 @@ export default function CommissionDiscount() {
                         e.currentTarget.src = "/logos/bitcoin-btc-logo.png";
                       }}
                     />
-                    <span className="font-semibold">
-                      {item.exchange_name}
-                    </span>
+                    <span className="font-semibold">{item.exchange_name}</span>
                   </td>
 
-                  <td className="p-4 text-center">
-                    {item.commission_value}%
-                  </td>
+                  <td className="p-4 text-center">{item.commission_value}%</td>
 
-                  <td className="p-4 text-center">
-                    {item.cashback_percentage}%
-                  </td>
+                  <td className="p-4 text-center">{item.cashback_percentage}%</td>
 
                   <td className="p-4 text-center">
                     {item.min_withdraw_amount} {item.currency}

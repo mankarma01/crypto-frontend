@@ -25,7 +25,7 @@ export default function LogoRow() {
     };
 
     fetchExchanges();
-  }, [navigate]);
+  }, []);
 
   if (loading) {
     return <div className="text-center py-16">Loading exchanges...</div>;
@@ -40,7 +40,7 @@ export default function LogoRow() {
       <div className="flex gap-8 animate-marquee-ltr w-max">
         {[...exchanges, ...exchanges].map((ex, index) => (
           <div
-            key={`${ex.id}-${index}`}
+            key={`${ex.id}-copy-${index < exchanges.length ? 0 : 1}`}
             onClick={() => ex.id && navigate(`/logorow/${ex.id}`)}
             className="flex flex-col items-center gap-2 min-w-[80px] cursor-pointer hover:scale-110 transition"
           >

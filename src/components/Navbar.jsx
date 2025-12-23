@@ -6,12 +6,13 @@ export default function Navbar({ isAuth, setIsAuth }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-    navigate("/");
-    setOpen(false);
-  };
+  const handleLogout = (setIsAuth) => {
+  localStorage.removeItem("token");
+  setIsAuth(false); // React state update
+  navigate("/login", { replace: true }); // React Router navigation
+};
+
+
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white border-b z-50">

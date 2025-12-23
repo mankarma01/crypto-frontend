@@ -284,12 +284,13 @@ function ResultPage({ formData }) {
 /* ===================== FLOW ===================== */
 
 export default function ExchangeFlow() {
-  const [formData, setFormData] = useState({
-    exchange_name: "",
-    entry_speed: "",
-    usually_use: "",
-    trades_per_day: "",
-  });
+const [formData, setFormData] = useState({
+  exchange_name: "",
+  entry_speed: null,     // changed
+  usually_use: null,     // changed
+  trades_per_day: null,  // changed
+});
+
 
   return (
     <Routes>

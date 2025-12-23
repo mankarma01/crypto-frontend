@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import Container from "./Container";
+import Loader from "../pages/Loader"; // import Loader component
 
 export default function OfficialAffiliateExchanges() {
   const [exchanges, setExchanges] = useState([]);
@@ -20,6 +21,7 @@ export default function OfficialAffiliateExchanges() {
   useEffect(() => {
     const fetchExchanges = async () => {
       try {
+        setLoading(true);
         const res = await api.get("/api/exchange/list");
         if (res.data?.result) {
           setExchanges(res.data.data || []);
@@ -34,12 +36,9 @@ export default function OfficialAffiliateExchanges() {
     fetchExchanges();
   }, []);
 
+  // Show loader while fetching data
   if (loading) {
-    return (
-      <Container>
-        <p className="text-center py-20">Loading...</p>
-      </Container>
-    );
+    return <Loader loading={loading} />;
   }
 
   return (
@@ -76,12 +75,10 @@ export default function OfficialAffiliateExchanges() {
                       e.currentTarget.src = "/logos/bitcoin-btc-logo.png";
                     }}
                   />
-                  <h3 className="text-lg font-bold">
-                    {item.exchange_name}
-                  </h3>
+                  <h3 className="text-lg font-bold">{item.exchange_name}</h3>
                 </div>
 
-                {/* Optional badge (if you later add from backend) */}
+                {/* Optional badge */}
                 {item.badge && (
                   <span
                     className={`px-3 py-1 text-xs rounded-full font-medium ${
@@ -103,9 +100,7 @@ export default function OfficialAffiliateExchanges() {
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-500">
-                    Transaction discount rate
-                  </span>
+                  <span className="text-gray-500">Transaction discount rate</span>
                   <span className="text-blue-700 font-semibold">
                     {item.commission_value}%
                   </span>
@@ -122,9 +117,7 @@ export default function OfficialAffiliateExchanges() {
                 </div>
                 <div className="p-3 text-center">
                   <p className="text-xs text-gray-500">Commission Type</p>
-                  <p className="font-medium capitalize">
-                    {item.commission_type}
-                  </p>
+                  <p className="font-medium capitalize">{item.commission_type}</p>
                 </div>
               </div>
             </div>
