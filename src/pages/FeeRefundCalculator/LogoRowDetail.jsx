@@ -1,22 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-
 import api from "../../api/api";
+
 export default function LogoRowDetail() {
   const { id } = useParams();
-  const [exchange , setExchange] = useState();
+  const [exchange, setExchange] = useState(null);
   const [loading, setLoading] = useState(true);
-   useEffect(() => {
+
+  // refs for scrolling
+  const refundPolicyRef = useRef(null);
+  const refundCalcRef = useRef(null);
+  const refundCheckRef = useRef(null);
+  const eventRef = useRef(null);
+  const consultRef = useRef(null);
+
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  useEffect(() => {
     const fetchExchange = async () => {
       try {
         const res = await api.post("/api/exchange/details", {
-          exchange_id: id, // send exchange_id in body
+          exchange_id: id,
         });
-       console.log(res);
+
         if (res.data?.success) {
           setExchange(res.data.data);
-        } else {
-          console.error("Failed to fetch exchange details");
         }
       } catch (err) {
         console.error("Error fetching exchange details:", err);
@@ -32,70 +45,107 @@ export default function LogoRowDetail() {
   if (!exchange) return <div className="text-center py-16">No details found.</div>;
 
   return (
-    <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md mt-30">
+    <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md mt-32">
+
       {/* Tabs */}
-      <div className="flex justify-center gap-4 mb-7">
-        <button className="px-3 py-2 border rounded">환급정책</button>
-        <button className="px-3 py-2 rounded bg-pink-500 text-white font-semibold">환급액 계산</button>
-        <button className="px-3 py-2 border rounded">환급 확인방법</button>
-        <button className="px-3 py-2 border rounded">이벤트</button>
-        <button className="px-3 py-2 border rounded">상담</button>
-      </div>
+      <div className="flex justify-center gap-3 mb-7 flex-wrap">
+        <button
+          className="px-3 py-2 border rounded"
+          onClick={() => scrollToSection(refundPolicyRef)}
+        >
+          환급정책
+        </button>
 
-      {/* Refund Info */}
-      <div className="flex justify-center items-center gap-4 text-lg font-semibold mb-8 border-b border-gray-300 pb-8">
-        
-        <div className="flex gap-1 items-center">
-          <span>환급률 (%)</span>
-          <span className="text-pink-500 font-bold">56%</span>
-        </div>
-        <span>|</span>
-        <div className="flex gap-1 items-center">
-          <span>거래 할인율 (%)</span>
-          <span className="text-blue-700 font-semibold">마감</span>
-        </div>
-      </div>
-      <div className="pb-4">
-        <h1 className="font-semibold text-lg">OKX 환급 정책</h1>
-      </div>
+        <button
+          className="px-3 py-2 rounded bg-pink-500 text-white font-semibold"
+          onClick={() => scrollToSection(refundCalcRef)}
+        >
+          환급액 계산
+        </button>
 
-      {/* OKX Refund Policy */}
-      <div className="grid grid-cols-4 gap-4 text-center border rounded p-4 mb-6">
-        <div>
-          <div className="font-semibold mb-1">환급 자산</div>
-          <div className="flex justify-center items-center gap-1">
-            USDT <span className="text-green-500 font-bold">🟢</span>
-          </div>
-        </div>
+        <button
+          className="px-3 py-2 border rounded"
+          onClick={() => scrollToSection(refundCheckRef)}
+        >
+          환급 확인방법
+        </button>
 
-        <div>
-          <div className="font-semibold mb-1">환급률</div>
-          <div className="text-pink-500 font-bold text-lg">56%</div>
-        </div>
+        <button
+          className="px-3 py-2 border rounded"
+          onClick={() => scrollToSection(eventRef)}
+        >
+          이벤트
+        </button>
 
-        <div>
-          <div className="font-semibold mb-1">수수료율 (%)</div>
-          <div className="text-sm">
-            지정가 <span className="line-through text-gray-400">0.02%</span> 0.008%<br />
-            시장가 <span className="line-through text-gray-400">0.05%</span> 0.022%
-          </div>
-        </div>
-
-        <div>
-          <div className="font-semibold mb-1">정산 시간</div>
-          <div className="text-sm">
-            매일 17시(KR)<br />
-            15시까지 환급 신청 시, 당일 정산
-          </div>
-        </div>
-      </div>
-
-      {/* Join Button */}
-      <div className="text-center">
-        <button className="bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 transition">
-          OKX 가입하기
+        <button
+          className="px-3 py-2 border rounded"
+          onClick={() => scrollToSection(consultRef)}
+        >
+          상담
         </button>
       </div>
+
+      {/* ================= 환급 정책 ================= */}
+      <div ref={refundPolicyRef} className="mb-10">
+        <h1 className="font-semibold text-lg mb-4">
+          {exchange.exchange_name} 환급 정책
+        </h1>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center border rounded p-4">
+          <div>
+            <div className="font-semibold mb-1">환급 자산</div>
+            <div>{exchange.currency}</div>
+          </div>
+
+          <div>
+            <div className="font-semibold mb-1">환급률</div>
+            <div className="text-pink-500 font-bold">
+              {exchange.cashback_percentage}%
+            </div>
+          </div>
+
+          <div>
+            <div className="font-semibold mb-1">커미션</div>
+            <div>
+              {exchange.commission_type === "percentage"
+                ? `${exchange.commission_value}%`
+                : exchange.commission_value}
+            </div>
+          </div>
+
+          <div>
+            <div className="font-semibold mb-1">최소 출금</div>
+            <div>
+              {exchange.min_withdraw_amount} {exchange.currency}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= 환급액 계산 ================= */}
+      <div ref={refundCalcRef} className="mb-10">
+        <h2 className="text-xl font-bold mb-3">환급액 계산</h2>
+        <p>거래 금액과 환급률을 기준으로 환급액이 계산됩니다.</p>
+      </div>
+
+      {/* ================= 환급 확인 방법 ================= */}
+      <div ref={refundCheckRef} className="mb-10">
+        <h2 className="text-xl font-bold mb-3">환급 확인방법</h2>
+        <p>마이페이지에서 환급 내역을 확인할 수 있습니다.</p>
+      </div>
+
+      {/* ================= 이벤트 ================= */}
+      <div ref={eventRef} className="mb-10">
+        <h2 className="text-xl font-bold mb-3">이벤트</h2>
+        <p>진행 중인 이벤트를 확인하세요.</p>
+      </div>
+
+      {/* ================= 상담 ================= */}
+      <div ref={consultRef} className="mb-10">
+        <h2 className="text-xl font-bold mb-3">상담</h2>
+        <p>문의 사항이 있으면 상담을 요청해주세요.</p>
+      </div>
+
     </div>
   );
 }

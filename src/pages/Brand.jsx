@@ -1,6 +1,7 @@
-import TetherbackIcon from "../assets/brandLogo.jpg"; // Replace with your icon path
 import HeroImage from "../assets/brandLogo.jpg"; // Full-width image you downloaded
 
+import { FiDollarSign, FiHeadphones, FiBarChart2 } from "react-icons/fi";
+import Container from "../components/Container";
 export default function Brand() {
   return (
     <section className="w-full">
@@ -21,63 +22,58 @@ export default function Brand() {
           </h1>
         </div>
       </div>
-
+   
       {/* About Us */}
+      <Container>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-pink-500">
           회사 소개
         </h2>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center">
-          테더백은 투자 기회를 확장하고 쉽고 편리하게 투자할 수 있는 방법을
-          제공합니다.
+        암호화폐 거래소는 투자 기회를 확대하고 쉽고 편리한 투자 방법을 제공합니다.
         </p>
       </div>
+</Container>
+ 
+{/* Business Highlight */}
+<Container>
+<div className="bg-white py-20">
+  <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
+    안전한 레퍼럴 거래를 지원합니다
+  </h2>
 
-      {/* Business Highlight */}
-      <div className="bg-gray-50 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-pink-500">
-          주요 비즈니스 특징
-        </h2>
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Item 1 */}
-          <div className="flex flex-col items-center text-center">
-            <img
-              src={TetherbackIcon}
-              alt="수수료 환급"
-              className="w-16 h-16 mb-4"
-            />
-            <h3 className="text-xl font-semibold mb-2">수수료 환급</h3>
-            <p className="text-gray-600">공식 B2B 제휴를 통해 제공</p>
-          </div>
+  <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
 
-          {/* Item 2 */}
-          <div className="flex flex-col items-center text-center">
-            <img
-              src={TetherbackIcon}
-              alt="컨설팅 지원"
-              className="w-16 h-16 mb-4"
-            />
-            <h3 className="text-xl font-semibold mb-2">컨설팅 지원</h3>
-            <p className="text-gray-600">
-              플랫폼 최초 해외 거래소 사용을 위한 지원
-            </p>
-          </div>
+    {/* Card 1 */}
+    <div className="border rounded-xl p-10 flex flex-col items-center text-center">
+      <FiDollarSign className="w-24 h-24 mb-10 text-blue-500" />
+      <p className="text-lg font-semibold leading-relaxed">
+        B2B 공식 제휴를 통한<br />
+        수수료 페이백
+      </p>
+    </div>
 
-          {/* Item 3 */}
-          <div className="flex flex-col items-center text-center">
-            <img
-              src={TetherbackIcon}
-              alt="금융 콘텐츠"
-              className="w-16 h-16 mb-4"
-            />
-            <h3 className="text-xl font-semibold mb-2">금융 콘텐츠</h3>
-            <p className="text-gray-600">
-              금융 기술 및 투자 정보를 위한 소프트 콘텐츠 제공
-            </p>
-          </div>
-        </div>
-      </div>
+    {/* Card 2 */}
+    <div className="border rounded-xl p-10 flex flex-col items-center text-center">
+      <FiHeadphones className="w-24 h-24 mb-10 text-green-500" />
+      <p className="text-lg font-semibold leading-relaxed">
+        플랫폼 최초 해외거래소<br />
+        이용 관련 상담 지원
+      </p>
+    </div>
 
+    {/* Card 3 */}
+    <div className="border rounded-xl p-10 flex flex-col items-center text-center">
+      <FiBarChart2 className="w-24 h-24 mb-10 text-purple-500" />
+      <p className="text-lg font-semibold leading-relaxed">
+        재테크, 투자 정보 전달을<br />
+        위한 소프트 콘텐츠 제공
+      </p>
+    </div>
+
+  </div>
+</div>
+</Container>
       {/* Message from CEO */}
       <div className="max-w-5xl mx-auto px-6 py-16">
         <h2 className="text-3xl md:text-4xl font-bold text-pink-500 mb-6 text-center">

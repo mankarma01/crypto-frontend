@@ -5,7 +5,7 @@ import api from "./api/api";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
-import Exchanges from "./components/Exchanges";  
+import Exchanges from "./components/Exchanges";
 import OfficialAffiliateExchanges from "./components/OfficialAffiliateExchanges";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -26,6 +26,7 @@ import RefundCalculator from "./pages/FeeRefundCalculator/RefundCalculator";
 import ExchangeFlow from "./pages/FeeRefundCalculator/GettingStarte";
 import LogoRowDetail from "./pages/FeeRefundCalculator/LogoRowDetail";
 import Profile from "./pages/Profile";
+import CommissionDiscount from "./pages/CommissionDiscount";
 
 function App() {
   const [isAuth, setIsAuth] = useState(null);
@@ -67,12 +68,21 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/exchanges" element={<Exchanges />} />
         <Route path="/logorow/:id" element={<LogoRowDetail />} />
-        <Route path="/official-affiliate-exchanges" element={<OfficialAffiliateExchanges />} />
+        <Route
+          path="/official-affiliate-exchanges"
+          element={<OfficialAffiliateExchanges />}
+        />
 
         {/* Redirect logged-in users away from login/register */}
         <Route
           path="/login"
-          element={isAuth ? <Navigate to="/profile" /> : <Login setIsAuth={setIsAuth} />}
+          element={
+            isAuth ? (
+              <Navigate to="/profile" />
+            ) : (
+              <Login setIsAuth={setIsAuth} />
+            )
+          }
         />
         <Route
           path="/register"
@@ -87,10 +97,14 @@ function App() {
         {/* Notice */}
         <Route path="/notice" element={<NoticeSection />} />
         <Route path="/notice/bitget-api-changes" element={<Bitget />} />
-        <Route path="/notice/tetherback-satisfaction" element={<Tetherback />} />
+        <Route
+          path="/notice/tetherback-satisfaction"
+          element={<Tetherback />}
+        />
         <Route path="/notice/okx-kyc-removal" element={<OKX />} />
         <Route path="/notice/bingx-kyc-transfer" element={<BINGX />} />
         <Route path="/notice/okx-pre-join-savings" element={<OKXVirtual />} />
+        <Route path="/commission-discount" element={<CommissionDiscount />} />
 
         {/* Refund */}
         <Route path="/refund" element={<RefundCalculator />} />

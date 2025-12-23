@@ -1,9 +1,14 @@
+import { Link } from "react-router-dom";
+
 export default function PromoCards() {
   return (
     <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6 pb-16">
-      
+
       {/* Cashback Card */}
-      <div className="relative bg-gradient-to-r from-pink-500 to-rose-400 text-white rounded-2xl p-8 overflow-hidden">
+      <Link
+        to="/official-affiliate-exchanges"
+        className="relative bg-gradient-to-r from-pink-500 to-rose-400 text-white rounded-2xl p-8 overflow-hidden hover:scale-[1.02] transition-transform"
+      >
         <h3 className="text-2xl font-bold mb-4">
           수수료 환급
         </h3>
@@ -24,10 +29,13 @@ export default function PromoCards() {
         <span className="absolute bottom-6 right-6 text-sm opacity-90">
           1 USDT 거래부터 환급 가능
         </span>
-      </div>
+      </Link>
 
       {/* Discount Card */}
-      <div className="bg-gradient-to-r from-indigo-900 to-indigo-700 text-white rounded-2xl p-8">
+      <Link
+        to="/commission-discount"
+        className="bg-gradient-to-r from-indigo-900 to-indigo-700 text-white rounded-2xl p-8 hover:scale-[1.02] transition-transform"
+      >
         <h3 className="text-2xl font-bold mb-4">
           수수료 할인
         </h3>
@@ -36,7 +44,7 @@ export default function PromoCards() {
           CryptoExchange에서만 제공하는<br />
           제휴 거래소 전용 할인 혜택을 확인하세요.
         </p>
-      </div>
+      </Link>
 
     </section>
   );
