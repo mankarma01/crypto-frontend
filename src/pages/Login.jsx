@@ -11,7 +11,6 @@ export default function Login({ setIsAuth }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("SUBMIT CLICKED");
     setLoading(true);
     setError("");
 
@@ -45,8 +44,6 @@ export default function Login({ setIsAuth }) {
       setLoading(false);
     }
   };
-
-  console.log("LOGIN COMPONENT RENDERED");
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 pt-24 flex flex-col">

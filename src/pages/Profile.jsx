@@ -29,10 +29,11 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+ const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "/login";
+};
+
 
   if (loading) {
     return (
