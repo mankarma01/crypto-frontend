@@ -57,7 +57,7 @@ export default function OfficialAffiliateExchanges() {
           {exchanges.map((item) => (
             <div
               key={item.id}
-              onClick={() => navigate(`/exchange/${item.id}`)}
+              onClick={() => navigate(`/logorow/${item.id}`)}
               className="bg-white rounded-xl border shadow-sm p-5 flex flex-col cursor-pointer hover:shadow-lg hover:scale-[1.02] transition"
             >
               {/* Header */}

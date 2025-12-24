@@ -1,11 +1,12 @@
 import { useState } from "react";
 import api from "../api/api";
+import Loader from "../pages/Loader"; // ✅ ADD THIS
 
 export default function FindID() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [userData, setUserData] = useState(null); // ✅ NEW
+  const [userData, setUserData] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,11 +22,11 @@ export default function FindID() {
 
     try {
       const response = await api.post("/api/find/id", {
-        email: input, // or mobile_no based on backend logic
+        email: input,
       });
 
       if (response.data.success) {
-        setUserData(response.data.data); // ✅ store user data
+        setUserData(response.data.data);
         setMessage(response.data.msg);
       } else {
         setMessage(response.data.msg || "아이디를 찾을 수 없습니다.");
@@ -39,7 +40,11 @@ export default function FindID() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 relative">
+      
+      {/* ✅ GLOBAL LOADER */}
+      <Loader loading={loading} />
+
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold text-center mb-6">
           아이디 찾기
@@ -56,6 +61,7 @@ export default function FindID() {
               className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              disabled={loading} // ✅ prevent input during loading
             />
           </div>
 
@@ -63,7 +69,9 @@ export default function FindID() {
             type="submit"
             disabled={loading}
             className={`w-full bg-pink-500 text-white py-2 rounded font-semibold transition ${
-              loading ? "opacity-50 cursor-not-allowed" : "hover:bg-pink-600"
+              loading
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-pink-600"
             }`}
           >
             {loading ? "조회 중..." : "다음"}
@@ -77,7 +85,7 @@ export default function FindID() {
           </div>
         )}
 
-        {/* ✅ USER DATA RESULT */}
+        {/* USER DATA RESULT */}
         {userData && (
           <div className="mt-6 border-t pt-4 space-y-2 text-sm">
             <div className="flex justify-between">

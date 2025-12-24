@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
+import Swal from "sweetalert2";
 import Loader from "../pages/Loader"; // import Loader component
 
 export default function Profile() {
@@ -30,10 +31,33 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
-  const handleLogout = () => {
+const handleLogout = async () => {
+  const result = await Swal.fire({
+    title: "로그아웃 하시겠습니까?",
+    text: "다시 로그인해야 합니다.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#ef4444",
+    cancelButtonColor: "#9ca3af",
+    confirmButtonText: "네, 로그아웃",
+    cancelButtonText: "취소",
+  });
+
+  if (result.isConfirmed) {
     localStorage.removeItem("token");
+
+    await Swal.fire({
+      title: "로그아웃 완료",
+      text: "안전하게 로그아웃되었습니다.",
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
     window.location.href = "/login";
-  };
+  }
+};
+
 
   // Show loader while fetching
   if (loading) {

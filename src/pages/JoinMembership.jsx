@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api"; // adjust path if needed
+import Logo from "../assets/logo1.png";
 
 // Step 1: ID & Password
 function Step1({ onNext }) {
@@ -21,12 +22,20 @@ function Step1({ onNext }) {
   };
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md mx-auto">
-      <div className="flex flex-col items-center mb-6">
-        <img src="/logo.png" alt="Logo" className="w-16 h-16 mb-4" />
-        <h2 className="text-2xl font-bold text-center">회원가입</h2>
-        <p className="text-sm text-gray-500 mt-1 text-center">1단계 / 5단계</p>
-      </div>
+  <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md mx-auto">
+  <div className="flex flex-col items-center mb-6">
+    <img
+      src={Logo}
+      alt="Logo"
+      className="h-16 object-contain mb-4"
+    />
+
+    <h2 className="text-2xl font-bold text-center">회원가입</h2>
+    <p className="text-sm text-gray-500 mt-1 text-center">
+      1단계 / 5단계
+    </p>
+  </div>
+
       <form className="space-y-4">
         <div>
           <label className="block text-sm text-gray-600 mb-1">이메일</label>

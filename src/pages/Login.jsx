@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api";
+import Loader from "../pages/Loader";
+import Logo from "../assets/logo1.png";
 
 export default function Login({ setIsAuth }) {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,17 +25,15 @@ export default function Login({ setIsAuth }) {
 
     try {
       const response = await api.post("/api/login", { email, password });
-      console.log("LOGIN RESPONSE:", response.data);
 
-      if (response.data.result) {
-  // ✅ Correct token save
-  localStorage.setItem("token", response.data.data.token);
+      if (response.data?.result) {
+        // ✅ Save token
+        localStorage.setItem("token", response.data.data.token);
 
-  setIsAuth(true);
-  navigate("/profile");
-}
- else {
-        setError(response.data.msg || "로그인 실패");
+        setIsAuth(true);
+        navigate("/profile");
+      } else {
+        setError(response.data?.msg || "로그인 실패");
       }
     } catch (err) {
       if (err.response?.status === 401) {
@@ -46,12 +47,22 @@ export default function Login({ setIsAuth }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 pt-24 flex flex-col">
+    <div className="min-h-screen bg-gray-50 px-6 pt-24 flex flex-col relative">
+      {/* ✅ Full page loader */}
+      <Loader loading={loading} />
+
       <div className="flex flex-1 items-center justify-center">
-        <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md relative z-10">
+          {/* Logo */}
+          <div className="flex justify-center mb-4">
+            <img src={Logo} alt="Logo" className="h-16 object-contain" />
+          </div>
+
           <h1 className="text-2xl font-bold text-center mb-6">로그인</h1>
 
-          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+          )}
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
@@ -66,7 +77,9 @@ export default function Login({ setIsAuth }) {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-600 mb-1">비밀번호</label>
+              <label className="block text-sm text-gray-600 mb-1">
+                비밀번호
+              </label>
               <input
                 type="password"
                 placeholder="********"
@@ -79,16 +92,19 @@ export default function Login({ setIsAuth }) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-pink-500 text-white py-2 rounded font-semibold hover:bg-pink-600 transition"
+              className="w-full bg-pink-500 text-white py-2 rounded font-semibold hover:bg-pink-600 transition disabled:opacity-60"
             >
-              {loading ? "로딩 중..." : "로그인"}
+              로그인
             </button>
           </form>
 
           <div className="flex justify-between mt-4 text-sm text-pink-500 font-medium">
-            <Link to="/find-pw" className="hover:underline">아이디 찾기</Link>
-            {/* <Link to="/find-id" className="hover:underline">비밀번호 찾기</Link> */}
-            <Link to="/join" className="hover:underline">회원가입</Link>
+            <Link to="/find-pw" className="hover:underline">
+              아이디 찾기
+            </Link>
+            <Link to="/join" className="hover:underline">
+              회원가입
+            </Link>
           </div>
         </div>
       </div>

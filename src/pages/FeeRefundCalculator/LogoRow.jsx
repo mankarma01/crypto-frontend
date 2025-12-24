@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
+import Loader from "../Loader"; // ✅ adjust path if needed
 
 export default function LogoRow() {
   const [exchanges, setExchanges] = useState([]);
@@ -12,7 +13,7 @@ export default function LogoRow() {
   useEffect(() => {
     const fetchExchanges = async () => {
       try {
-  const res = await api.get("/api/exchange/list");
+        const res = await api.get("/api/exchange/list");
         setExchanges(res.data?.data || []);
       } catch (err) {
         console.error(
@@ -27,12 +28,22 @@ export default function LogoRow() {
     fetchExchanges();
   }, []);
 
+  // ✅ Loader
   if (loading) {
-    return <div className="text-center py-16">Loading exchanges...</div>;
+    return (
+      <div className="py-16">
+        <Loader loading={loading} />
+      </div>
+    );
   }
 
+  // ✅ Empty state
   if (!exchanges.length) {
-    return <div className="text-center py-16">No exchanges found.</div>;
+    return (
+      <div className="text-center py-16 text-gray-500">
+        No exchanges found.
+      </div>
+    );
   }
 
   return (
@@ -40,9 +51,9 @@ export default function LogoRow() {
       <div className="flex gap-8 animate-marquee-ltr w-max">
         {[...exchanges, ...exchanges].map((ex, index) => (
           <div
-            key={`${ex.id}-copy-${index < exchanges.length ? 0 : 1}`}
+            key={`${ex.id}-${index}`}
             onClick={() => ex.id && navigate(`/logorow/${ex.id}`)}
-            className="flex flex-col items-center gap-2 min-w-[80px] cursor-pointer hover:scale-110 transition"
+            className="flex flex-col items-center gap-2 min-w-20 cursor-pointer hover:scale-110 transition"
           >
             <img
               src={

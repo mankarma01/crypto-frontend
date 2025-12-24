@@ -23,7 +23,7 @@ export default function Brand() {
   return (
     <section className="w-full relative">
       {/* Full-width hero image */}
-      <div className="w-full h-96 md:h-[500px] relative overflow-hidden">
+      <div className="w-full h-96 md:h-125 relative overflow-hidden">
         <img
           src={HeroImage}
           alt="Hero"

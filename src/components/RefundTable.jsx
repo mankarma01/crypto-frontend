@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
+import Loader from "../pages/Loader";
 
 export default function RefundTable() {
   const [refunds, setRefunds] = useState([]);
@@ -24,8 +25,11 @@ export default function RefundTable() {
   }, []);
 
   return (
-    <div className="bg-white rounded-xl shadow-md mt-10 overflow-hidden">
+    <div className="bg-white rounded-xl shadow-md mt-10 overflow-hidden relative">
       
+      {/* ✅ Loader Overlay */}
+      <Loader loading={loading} />
+
       {/* Header */}
       <div className="p-6 border-b">
         <h2 className="text-xl font-bold text-gray-900">
@@ -35,13 +39,6 @@ export default function RefundTable() {
           실제 사용자들의 최근 환급 내역입니다
         </p>
       </div>
-
-      {/* Loading */}
-      {loading && (
-        <div className="p-6 text-center text-gray-500">
-          Loading refund status...
-        </div>
-      )}
 
       {/* Empty State */}
       {!loading && refunds.length === 0 && (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import Container from "../components/Container";
-import Loader from "../pages/Loader"; // import Loader
+import Loader from "../pages/Loader";
 
 export default function CommissionDiscount() {
   const [exchanges, setExchanges] = useState([]);
@@ -16,7 +16,6 @@ export default function CommissionDiscount() {
       try {
         setLoading(true);
         const res = await api.get("/api/exchange/list");
-
         if (res.data?.result) {
           setExchanges(res.data.data || []);
         }
@@ -30,10 +29,7 @@ export default function CommissionDiscount() {
     fetchExchanges();
   }, []);
 
-  // Show loader while fetching data
-  if (loading) {
-    return <Loader loading={loading} />;
-  }
+  if (loading) return <Loader loading={loading} />;
 
   return (
     <Container>
@@ -45,7 +41,7 @@ export default function CommissionDiscount() {
           테더백 회원은 거래할때 마다 수수료 할인
         </p>
 
-        {/* Summary Cards (CLICKABLE) */}
+        {/* Summary Cards */}
         <div className="grid md:grid-cols-4 gap-6 mt-10">
           {exchanges.map((item) => (
             <div
@@ -78,66 +74,74 @@ export default function CommissionDiscount() {
         </div>
 
         {/* Details Table */}
-        <div className="overflow-x-auto mt-16">
-          <table className="w-full border-collapse">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="p-4 text-left">거래소</th>
-                <th className="p-4">할인율</th>
-                <th className="p-4">환급률</th>
-                <th className="p-4">최소 출금</th>
-                <th className="p-4"></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {exchanges.map((item) => (
-                <tr key={item.id} className="border-t">
-                  {/* CLICKABLE exchange cell */}
-                  <td
-                    className="p-4 flex items-center gap-3 cursor-pointer
-                               hover:text-blue-600"
-                    onClick={() => navigate(`/logorow/${item.id}`)}
-                  >
-                    <img
-                      src={
-                        item.logo
-                          ? `${BASE_URL}/uploads/${encodeURIComponent(item.logo)}`
-                          : "/logos/bitcoin-btc-logo.png"
-                      }
-                      alt={item.exchange_name}
-                      className="h-8 w-8 object-contain"
-                      onError={(e) => {
-                        e.currentTarget.src = "/logos/bitcoin-btc-logo.png";
-                      }}
-                    />
-                    <span className="font-semibold">{item.exchange_name}</span>
-                  </td>
-
-                  <td className="p-4 text-center">{item.commission_value}%</td>
-
-                  <td className="p-4 text-center">{item.cashback_percentage}%</td>
-
-                  <td className="p-4 text-center">
-                    {item.min_withdraw_amount} {item.currency}
-                  </td>
-
-                  {/* External referral link */}
-                  <td className="p-4 text-center">
-                    <a
-                      href={item.referral_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                    >
-                      수수료 우대 받기
-                    </a>
-                  </td>
+        <div className="mt-16 -mx-6 overflow-x-auto">
+          <div className="min-w-225">
+            <table className="w-full border-collapse">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="p-4 text-left">거래소</th>
+                  <th className="p-4">할인율</th>
+                  <th className="p-4">환급률</th>
+                  <th className="p-4">최소 출금</th>
+                  <th className="p-4"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {exchanges.map((item) => (
+                  <tr key={item.id} className="border-t">
+                    <td
+                      className="p-4 flex items-center gap-3 cursor-pointer
+                               hover:text-blue-600"
+                      onClick={() => navigate(`/logorow/${item.id}`)}
+                    >
+                      <img
+                        src={
+                          item.logo
+                            ? `${BASE_URL}/uploads/${encodeURIComponent(
+                                item.logo
+                              )}`
+                            : "/logos/bitcoin-btc-logo.png"
+                        }
+                        alt={item.exchange_name}
+                        className="h-8 w-8 object-contain"
+                        onError={(e) => {
+                          e.currentTarget.src = "/logos/bitcoin-btc-logo.png";
+                        }}
+                      />
+                      <span className="font-semibold">
+                        {item.exchange_name}
+                      </span>
+                    </td>
+
+                    <td className="p-4 text-center">
+                      {item.commission_value}%
+                    </td>
+                    <td className="p-4 text-center">
+                      {item.cashback_percentage}%
+                    </td>
+                    <td className="p-4 text-center">
+                      {item.min_withdraw_amount} {item.currency}
+                    </td>
+
+                    {/* Internal logorow navigation */}
+                    <td className="p-4 text-center">
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/logorow/${item.id}`);
+                        }}
+                        className="inline-block px-4 py-2 bg-blue-600 text-white
+                                 rounded-lg hover:bg-blue-700 cursor-pointer transition"
+                      >
+                        수수료 우대 받기
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </Container>

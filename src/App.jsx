@@ -27,36 +27,39 @@ import ExchangeFlow from "./pages/FeeRefundCalculator/GettingStarte";
 import LogoRowDetail from "./pages/FeeRefundCalculator/LogoRowDetail";
 import Profile from "./pages/Profile";
 import CommissionDiscount from "./pages/CommissionDiscount";
+import Loader from "./pages/Loader";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(null);
+  const [isAuth, setIsAuth] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem("token");
+
       if (!token) {
         setIsAuth(false);
+        setAuthLoading(false);
         return;
       }
 
       try {
-        await api.get("/api/user_profile"); // returns 200 if valid
+        await api.get("/api/user_profile"); // validate token
         setIsAuth(true);
       } catch (err) {
         localStorage.removeItem("token");
         setIsAuth(false);
+      } finally {
+        setAuthLoading(false);
       }
     };
 
     checkToken();
   }, []);
 
-  if (isAuth === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">로그인 상태 확인 중...</p>
-      </div>
-    );
+  // ✅ Global Loader (NO TEXT)
+  if (authLoading) {
+    return <Loader loading={true} />;
   }
 
   return (
@@ -73,20 +76,16 @@ function App() {
           element={<OfficialAffiliateExchanges />}
         />
 
-        {/* Redirect logged-in users away from login/register */}
+        {/* Auth Routes */}
         <Route
           path="/login"
           element={
-            isAuth ? (
-              <Navigate to="/profile" />
-            ) : (
-              <Login setIsAuth={setIsAuth} />
-            )
+            isAuth ? <Navigate to="/profile" replace /> : <Login setIsAuth={setIsAuth} />
           }
         />
         <Route
           path="/register"
-          element={isAuth ? <Navigate to="/profile" /> : <Register />}
+          element={isAuth ? <Navigate to="/profile" replace /> : <Register />}
         />
 
         <Route path="/find-pw" element={<FindID />} />
@@ -97,25 +96,19 @@ function App() {
         {/* Notice */}
         <Route path="/notice" element={<NoticeSection />} />
         <Route path="/notice/bitget-api-changes" element={<Bitget />} />
-        <Route
-          path="/notice/tetherback-satisfaction"
-          element={<Tetherback />}
-        />
+        <Route path="/notice/tetherback-satisfaction" element={<Tetherback />} />
         <Route path="/notice/okx-kyc-removal" element={<OKX />} />
         <Route path="/notice/bingx-kyc-transfer" element={<BINGX />} />
         <Route path="/notice/okx-pre-join-savings" element={<OKXVirtual />} />
+
         <Route path="/commission-discount" element={<CommissionDiscount />} />
-
-        {/* Refund */}
         <Route path="/refund" element={<RefundCalculator />} />
-
-        {/* Step Flow */}
         <Route path="/getting-started/*" element={<ExchangeFlow />} />
 
         {/* Protected Profile */}
         <Route
           path="/profile"
-          element={isAuth ? <Profile /> : <Navigate to="/login" />}
+          element={isAuth ? <Profile /> : <Navigate to="/login" replace />}
         />
       </Routes>
 

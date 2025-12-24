@@ -17,10 +17,10 @@ export default function Footer() {
         </div>
 
         {/* Right: Terms / Privacy */}
-        <div className="flex flex-col md:flex-row gap-4 text-sm md:text-base">
+        {/* <div className="flex flex-col md:flex-row gap-4 text-sm md:text-base">
           <a href="/terms" className="hover:underline">이용약관</a>
           <a href="/privacy" className="hover:underline">개인정보처리방침</a>
-        </div>
+        </div> */}
       </div>
 
       {/* Bottom copyright */}
